@@ -18,8 +18,11 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Grant Execute Permission
-        run: chmod +x gradlew
+      # Yeh step automatic ek temporary gradlew file bana dega agar aapke repo me missing hai toh
+      - name: Setup Gradle wrapper
+        run: |
+          gradle wrapper --gradle-version 8.0
+          chmod +x gradlew
 
       - name: Build APK
         run: ./gradlew assembleDebug --no-daemon --stacktrace
